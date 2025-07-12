@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration - noclip_crafting</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-code"></i> NoClip Labs</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-section">
+                    <span class="nav-section-title">Projects</span>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-hammer"></i> noclip_crafting</a></li>
+                        <li><a href="../noclip-drugs/index.html"><i class="fas fa-pills"></i> noclip_drugs</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section">
+                    <span class="nav-section-title">noclip_crafting</span>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-book"></i> Overview</a></li>
+                        <li><a href="installation.html"><i class="fas fa-download"></i> Installation</a></li>
+                        <li><a href="configuration.html" class="active"><i class="fas fa-cogs"></i> Configuration</a></li>
+                        <li><a href="exports.html"><i class="fas fa-code"></i> Exports</a></li>
+                        <li><a href="troubleshooting.html"><i class="fas fa-tools"></i> Troubleshooting</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section">
+                    <span class="nav-section-title">Resources</span>
+                    <ul>
+                        <li><a href="../troubleshooting.html"><i class="fas fa-tools"></i> Troubleshooting</a></li>
+                        <li><a href="https://github.com/NoClip-Labs" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="index.html">noclip_crafting</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Configuration</span>
+            </div>
+
+            <div class="docs-content">
+                <h1><i class="fas fa-cogs"></i> Configuration Guide</h1>
+                <p>Comprehensive configuration guide for noclip_crafting, covering all features and customization options.</p>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Note:</strong> All configuration options are in the <code>config.lua</code> file. Make sure to restart the resource after making changes.
+                </div>
+
+                <h2>Table of Contents</h2>
+                <ul>
+                    <li><a href="#basic-config">Basic Configuration</a></li>
+                    <li><a href="#skill-system">Skill System</a></li>
+                    <li><a href="#success-fail-system">Success/Fail System</a></li>
+                    <li><a href="#critical-success">Critical Success System</a></li>
+                    <li><a href="#police-alerts">Police Alert System</a></li>
+                    <li><a href="#weapon-repair">Weapon Repair System</a></li>
+                    <li><a href="#crafting-locations">Crafting Locations</a></li>
+                    <li><a href="#item-requirements">Item Requirements</a></li>
+                    <li><a href="#recipe-configuration">Recipe Configuration</a></li>
+                </ul>
+
+                <section id="basic-config">
+                    <h2><i class="fas fa-cog"></i> Basic Configuration</h2>
+                    <p>Core settings for the crafting system.</p>
+
+                    <div class="code-block">
+                        <h4>Basic Settings</h4>
+                        <pre><code>Config = {
+    Debug = false, -- Enable debug mode
+    Lan = "en", -- Language setting
+    Notify = "ox", -- Notification system
+    
+    blueprintCrafting = false, -- Enable blueprint crafting
+    toolboxTargets = false, -- Enable toolbox targets
+}</code></pre>
+                    </div>
+
+                    <h3>Debug Mode</h3>
+                    <p>Enable debug mode to see detailed information about crafting operations, target zones, and system events.</p>
+
+                    <h3>Language Support</h3>
+                    <p>Currently supports English ("en"). Additional languages can be added to the <code>locales</code> folder.</p>
+                </section>
+
+                <section id="skill-system">
+                    <h2><i class="fas fa-chart-line"></i> Skill System</h2>
+                    <p>Experience-based progression system with level requirements and skill bonuses.</p>
+
+                    <div class="code-block">
+                        <h4>Skill System Configuration</h4>
+                        <pre><code>SkillSystem = {
+    enabled = true, -- Global toggle for skill system
+    maxLevel = 100, -- Maximum skill level
+    experienceMultiplier = 1.0, -- Global multiplier for experience gained
+    
+    -- Experience required for each level (exponential growth)
+    baseExp = 100, -- Base experience required for level 1
+    expMultiplier = 1.5, -- Multiplier for exponential growth
+    
+    -- Notification settings
+    showLevelUp = true, -- Show level up notifications
+    showExpGain = false, -- Show experience gain notifications
+    
+    -- Default settings for recipes
+    defaultExpGain = 10, -- Default experience gained per craft
+    defaultLevelRequirement = 0, -- Default level required to craft
+    hideUntilLevel = false, -- Show recipe but disable if level too low
+}</code></pre>
+                    </div>
+
+                    <h3>Per-Recipe Skill Settings</h3>
+                    <div class="code-block">
+                        <pre><code>{ 
+    ["weapon_pistol"] = { ["steel"] = 5, ["gunpowder"] = 2 }, 
+    amount = 1,
+    expGain = 50, -- Experience gained for this recipe
+    levelRequirement = 10, -- Required level to craft
+    hideUntilLevel = true, -- Hide until level requirement met
+}</code></pre>
+                    </div>
+                </section>
+
+                <section id="success-fail-system">
+                    <h2><i class="fas fa-dice"></i> Success/Fail System</h2>
+                    <p>Dynamic crafting outcomes with success/failure chances based on skill level.</p>
+
+                    <div class="code-block">
+                        <h4>Success/Fail Configuration</h4>
+                        <pre><code>SuccessFailSystem = {
+    enabled = true, -- Global toggle for success/fail system
+    
+    -- Base success chance calculation
+    baseSuccessChance = 75, -- Base success chance (percentage)
+    skillBonusPerLevel = 1.0, -- Additional success chance per skill level
+    maxSuccessChance = 95, -- Maximum success chance (percentage)
+    
+    -- Failure handling options
+    failureHandling = {
+        loseAllIngredients = false, -- Lose all ingredients on failure
+        losePartialIngredients = true, -- Lose some ingredients on failure
+        partialLossPercentage = 50, -- Percentage of ingredients lost on failure
+        keepCraftedItem = false, -- Keep crafted item even on failure
+    },
+    
+    -- Byproduct system
+    byproducts = {
+        enabled = true, -- Global toggle for byproduct system
+        defaultByproductChance = 30, -- 30% chance to get byproducts
+        defaultByproductAmount = 1, -- Default amount of byproducts
+        defaultByproductTrigger = "failure", -- "success", "failure", "both"
+    },
+    
+    -- Hazard system for dangerous crafting
+    hazards = {
+        enabled = true, -- Global toggle for hazard system
+        hazardTypes = {
+            ["explosion"] = {
+                enabled = true,
+                chance = 15, -- 15% chance when crafting fails
+                damage = 25, -- Damage amount
+                radius = 3.0, -- Explosion radius
+            },
+            ["poison"] = {
+                enabled = true,
+                chance = 20, -- 20% chance when crafting fails
+                damage = 15, -- Initial damage
+                dotDamage = 5, -- Damage over time
+                dotDuration = 10, -- Duration in seconds
+            },
+        },
+    },
+}</code></pre>
+                    </div>
+
+                    <h3>Per-Recipe Success/Fail Settings</h3>
+                    <div class="code-block">
+                        <pre><code>{ 
+    ["advanced_weapon"] = { ["steel"] = 10, ["gunpowder"] = 5 }, 
+    amount = 1,
+    successChance = 40, -- Low base success chance
+    skillBonus = 2.0, -- High skill bonus per level
+    failureHandling = "full", -- Lose all ingredients on failure
+    successBonus = true, -- Enable success bonuses
+    failurePenalty = true, -- Enable failure penalties
+    hazards = true, -- Enable hazards for this recipe
+    hazardTypes = { "explosion", "poison" }, -- Multiple hazards
+    hazardChance = 50, -- 50% chance of hazard on failure
+}</code></pre>
+                    </div>
+                </section>
+
+                <section id="critical-success">
+                    <h2><i class="fas fa-star"></i> Critical Success System</h2>
+                    <p>Special outcomes that provide bonus rewards and material conservation.</p>
+
+                    <div class="code-block">
+                        <h4>Critical Success Configuration</h4>
+                        <pre><code>CriticalSuccess = {
+    enabled = true, -- Global toggle for critical success system
+    
+    -- Base critical success settings
+    baseCriticalChance = 5, -- Base 5% chance for critical success
+    skillBonusPerLevel = 0.5, -- Additional 0.5% chance per skill level
+    maxCriticalChance = 15, -- Maximum 15% critical success chance
+    
+    -- Material conservation settings
+    materialConservation = {
+        enabled = true, -- Enable material conservation on critical success
+        conservationPercentage = 50, -- Percentage of materials saved
+        minimumConserved = 1, -- Minimum number of materials to conserve per type
+    },
+    
+    -- Bonus rewards for critical success
+    bonusRewards = {
+        enabled = true, -- Enable bonus rewards on critical success
+        extraItemChance = 25, -- 25% chance to get extra crafted item
+        extraItemAmount = 1, -- Amount of extra items given
+        bonusExpMultiplier = 2.0, -- Double experience on critical success
+        
+        -- Special rewards
+        specialRewards = {
+            enabled = true, -- Enable special rewards
+            chance = 10, -- 10% chance for special reward
+            rewardTypes = {
+                ["rare_material"] = {
+                    chance = 40, -- 40% chance for rare material
+                    items = {
+                        ["pure_cocaine"] = { chance = 30, amount = 1 },
+                        ["pure_meth"] = { chance = 30, amount = 1 },
+                    }
+                },
+                ["money_bonus"] = {
+                    chance = 30, -- 30% chance for money bonus
+                    amount = { min = 100, max = 500 }, -- Random amount
+                },
+            }
+        }
+    },
+}</code></pre>
+                    </div>
+                </section>
+
+                <section id="police-alerts">
+                    <h2><i class="fas fa-shield-alt"></i> Police Alert System</h2>
+                    <p>Enhanced police alert system with exact and randomized location reporting.</p>
+
+                    <div class="code-block">
+                        <h4>Police Alert Configuration</h4>
+                        <pre><code>policeAlerts = {
+    enabled = true, -- Global toggle for police alert system
+    defaultLocationType = "randomized", -- "exact" or "randomized"
+    
+    -- Location accuracy settings
+    locationAccuracy = {
+        exact = {
+            enabled = true,
+            chance = 30, -- 30% chance for exact location
+            description = "Exact location pinpointed",
+            blipFlash = true, -- Make blip flash for exact locations
+            blipScale = 1.0, -- Larger blip for exact locations
+        },
+        randomized = {
+            enabled = true,
+            chance = 70, -- 70% chance for randomized location
+            description = "General area detected",
+            offsetRadius = { min = 50, max = 200 }, -- Random offset
+            blipScale = 0.8, -- Smaller blip for general areas
+            searchArea = {
+                enabled = true,
+                radius = 100, -- Search radius around offset location
+                description = "Search this area for suspects",
+            }
+        }
+    },
+    
+    -- Integration settings
+    integrations = {
+        ps_dispatch = {
+            enabled = true,
+            exactLocationCode = "10-90",
+            generalLocationCode = "10-91",
+        },
+        qb_dispatch = {
+            enabled = true,
+            exactLocationCode = "10-90",
+            generalLocationCode = "10-91",
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <h3>Per-Recipe Police Alert Settings</h3>
+                    <div class="code-block">
+                        <pre><code>{ 
+    ["weapon_pistol"] = { ["steel"] = 5, ["gunpowder"] = 2 }, 
+    amount = 1,
+    policeAlertSuccess = 50, -- 50% chance to alert police on success
+    policeAlertFailure = 80, -- 80% chance to alert police on failure
+    policeAlertType = "weapon_crafting", -- Type of alert to send
+    policeAlertLocationType = "exact", -- "exact" or "randomized"
+}</code></pre>
+                    </div>
+                </section>
+
+                <section id="weapon-repair">
+                    <h2><i class="fas fa-wrench"></i> Weapon Repair System</h2>
+                    <p>Comprehensive weapon repair system with material requirements and outcome chances.</p>
+
+                    <div class="code-block">
+                        <h4>Weapon Repair Configuration</h4>
+                        <pre><code>WeaponRepairSystem = {
+    enabled = true, -- Global toggle for weapon repair system
+    requiredTool = "toolkit", -- Required tool (not consumed)
+    defaultRepairTime = 10000, -- 10 seconds repair time
+    defaultDurabilityRestore = 100, -- Restore to 100% durability
+    
+    -- Critical success settings
+    criticalSuccess = {
+        enabled = true, -- Enable critical success for repairs
+        baseChance = 10, -- 10% base chance
+        skillBonusPerLevel = 1.0, -- +1% per skill level
+        maxChance = 25, -- Maximum 25% chance
+        materialReduction = 50, -- 50% reduction in materials required
+    },
+    
+    -- Failure settings
+    failure = {
+        enabled = true, -- Enable failure chance for repairs
+        baseChance = 15, -- 15% base chance
+        skillReductionPerLevel = 1.0, -- -1% per skill level
+        minChance = 5, -- Minimum 5% chance
+        materialConsumption = 25, -- 25% of materials consumed on failure
+        allowRetry = true, -- Allow retry after failure
+    },
+    
+    -- Critical failure settings
+    criticalFailure = {
+        enabled = true, -- Enable critical failure
+        baseChance = 5, -- 5% base chance
+        skillReductionPerLevel = 0.5, -- -0.5% per skill level
+        minChance = 1, -- Minimum 1% chance
+        weaponDestruction = true, -- Destroy weapon on critical failure
+        replacementItems = { -- Items given instead of destroyed weapon
+            ["weapon_parts"] = { chance = 60, amount = 1 },
+            ["scrap_metal"] = { chance = 30, amount = 2 },
+            ["gunpowder"] = { chance = 10, amount = 1 },
+        },
+    },
+    
+    -- Weapon categories and their repair requirements
+    weaponCategories = {
+        ["pistols"] = {
+            label = "Pistols",
+            skillName = "weapon_repair",
+            baseMaterials = {
+                ["iron_ore"] = 2,
+                ["steel_ingot"] = 1,
+                ["gunpowder"] = 1,
+            },
+            criticalSuccessChance = 12,
+            failureChance = 12,
+            criticalFailureChance = 3,
+        },
+        ["rifles"] = {
+            label = "Rifles",
+            skillName = "weapon_repair",
+            baseMaterials = {
+                ["iron_ore"] = 4,
+                ["steel_ingot"] = 2,
+                ["gunpowder"] = 2,
+                ["wood"] = 1,
+            },
+            criticalSuccessChance = 8,
+            failureChance = 18,
+            criticalFailureChance = 6,
+        },
+    },
+}</code></pre>
+                    </div>
+
+                    <h3>Weapon Repair Bench Configuration</h3>
+                    <div class="code-block">
+                        <pre><code>{
+    name = "Weapon Repair Bench",
+    coords = {
+        vector4(452.0, -980.0, 30.7, 90.0), -- Police station
+        vector4(-1108.0, -845.0, 19.3, 120.0), -- Gun shop
+    },
+    job = { ["mechanic"] = 0, ["police"] = 0, ["gunsmith"] = 0 },
+    blip = {
+        sprite = 566,
+        col = 1,
+        scale = 0.8,
+    },
+    prop = `prop_tool_bench02`,
+    weaponRepair = true, -- Enable weapon repair for this bench
+    weaponRepairSystem = {
+        skillName = "weapon_repair",
+        defaultRepairTime = 8000, -- 8 seconds for this bench
+        defaultDurabilityRestore = 100,
+        defaultCriticalSuccessChance = 12,
+        defaultFailureChance = 12,
+        defaultCriticalFailureChance = 3,
+    },
+}</code></pre>
+                    </div>
+                </section>
+
+                <section id="crafting-locations">
+                    <h2><i class="fas fa-map-marker-alt"></i> Crafting Locations</h2>
+                    <p>Configure multiple crafting benches with unique recipes and requirements.</p>
+
+                    <div class="code-block">
+                        <h4>Basic Location Configuration</h4>
+                        <pre><code>Locations = {
+    {
+        name = "Basic Crafting Bench",
+        coords = {
+            vector4(123.45, 678.90, 12.34, 180.0),
+        },
+        blip = {
+            sprite = 566,
+            col = 1,
+            scale = 0.8,
+        },
+        prop = `prop_tool_bench02`,
+        job = { ["mechanic"] = 0 }, -- Optional job restriction
+        craftingTable = {
+            -- Recipe configuration here
+        },
+    },
+}</code></pre>
+                    </div>
+
+                    <h3>Location Properties</h3>
+                    <ul>
+                        <li><strong>name:</strong> Display name for the crafting bench</li>
+                        <li><strong>coords:</strong> Vector4 coordinates (x, y, z, heading)</li>
+                        <li><strong>blip:</strong> Map blip configuration (optional)</li>
+                        <li><strong>prop:</strong> 3D model prop for the bench</li>
+                        <li><strong>job:</strong> Job restrictions (optional)</li>
+                        <li><strong>requiredItems:</strong> Required items to access (optional)</li>
+                        <li><strong>skillSystem:</strong> Skill system settings (optional)</li>
+                        <li><strong>craftingTable:</strong> Recipe definitions</li>
+                    </ul>
+                </section>
+
+                <section id="item-requirements">
+                    <h2><i class="fas fa-box"></i> Item Requirements</h2>
+                    <p>Require specific items to access crafting benches.</p>
+
+                    <div class="code-block">
+                        <h4>Item Requirement Configuration</h4>
+                        <pre><code>{
+    name = "Advanced Crafting Bench",
+    coords = { vector4(123.45, 678.90, 12.34, 180.0) },
+    prop = `prop_tool_bench02`,
+    
+    -- Item requirement system (OR logic)
+    requiredItems = {
+        ["crafting_toolkit"] = 1, -- Requires crafting toolkit
+        ["advanced_blueprint"] = 1, -- OR requires advanced blueprint
+        ["master_craftsman_license"] = 1, -- OR requires master craftsman license
+    },
+    -- Note: This uses OR logic - player needs ANY of these items to access the bench
+    
+    craftingTable = {
+        -- Recipe configuration here
+    },
+}</code></pre>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Note:</strong> The item requirement system uses OR logic. Players need ANY of the specified items to access the crafting bench.
+                    </div>
+                </section>
+
+                <section id="recipe-configuration">
+                    <h2><i class="fas fa-list"></i> Recipe Configuration</h2>
+                    <p>Detailed recipe configuration with all available options.</p>
+
+                    <div class="code-block">
+                        <h4>Complete Recipe Example</h4>
+                        <pre><code>craftingTable = {
+    ["Weapons"] = {
+        ["Advanced Pistol"] = {
+            { 
+                ["advanced_pistol"] = { 
+                    ["steel"] = 10, 
+                    ["gunpowder"] = 5, 
+                    ["precision_parts"] = 2 
+                }, 
+                amount = 1,
+                time = 15000, -- 15 seconds crafting time
+                anim = { "mini@repair", "fixing_a_ped" }, -- Custom animation
+                
+                -- Skill system features
+                expGain = 100, -- Experience gained
+                levelRequirement = 25, -- Required level
+                hideUntilLevel = true, -- Hidden until level requirement met
+                
+                -- Success/fail system features
+                successChance = 60, -- Base success chance
+                skillBonus = 1.5, -- Skill bonus per level
+                failureHandling = "partial", -- "none", "partial", "full"
+                successBonus = true, -- Enable success bonuses
+                failurePenalty = true, -- Enable failure penalties
+                
+                -- Hazard system features
+                hazards = true, -- Enable hazards
+                hazardTypes = { "explosion", "poison" }, -- Multiple hazards
+                hazardChance = 30, -- Hazard chance on failure
+                
+                -- Byproduct system features
+                byproducts = true, -- Enable byproducts
+                byproductChance = 40, -- Byproduct chance
+                byproductTrigger = "both", -- "success", "failure", "both"
+                
+                -- Police alert system features
+                policeAlertSuccess = 30, -- Alert chance on success
+                policeAlertFailure = 70, -- Alert chance on failure
+                policeAlertType = "weapon_crafting", -- Alert type
+                policeAlertLocationType = "exact", -- "exact" or "randomized"
+            },
+        },
+    },
+}</code></pre>
+                    </div>
+
+                    <h3>Recipe Properties</h3>
+                    <ul>
+                        <li><strong>amount:</strong> Number of items crafted</li>
+                        <li><strong>time:</strong> Crafting duration in milliseconds</li>
+                        <li><strong>anim:</strong> Custom animation (optional)</li>
+                        <li><strong>expGain:</strong> Experience gained from crafting</li>
+                        <li><strong>levelRequirement:</strong> Required skill level</li>
+                        <li><strong>hideUntilLevel:</strong> Hide recipe until level requirement met</li>
+                        <li><strong>successChance:</strong> Base success chance percentage</li>
+                        <li><strong>skillBonus:</strong> Success chance bonus per skill level</li>
+                        <li><strong>failureHandling:</strong> How to handle failed crafts</li>
+                        <li><strong>hazards:</strong> Enable hazard system for this recipe</li>
+                        <li><strong>byproducts:</strong> Enable byproduct system for this recipe</li>
+                        <li><strong>policeAlertSuccess/Failure:</strong> Police alert chances</li>
+                        <li><strong>policeAlertLocationType:</strong> "exact" or "randomized" location</li>
+                    </ul>
+                </section>
+
+                <div class="next-steps">
+                    <h3>Next Steps</h3>
+                    <div class="step-links">
+                        <a href="installation.html" class="btn btn-secondary">
+                            <i class="fas fa-download"></i>
+                            Installation Guide
+                        </a>
+                        <a href="exports.html" class="btn btn-primary">
+                            <i class="fas fa-code"></i>
+                            Exports & API
+                        </a>
+                        <a href="troubleshooting.html" class="btn btn-secondary">
+                            <i class="fas fa-tools"></i>
+                            Troubleshooting
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html> 
