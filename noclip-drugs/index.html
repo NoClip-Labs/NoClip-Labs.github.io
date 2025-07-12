@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>noclip_drugs - Documentation</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-code"></i> NoClip Labs</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-section">
+                    <span class="nav-section-title">Projects</span>
+                    <ul>
+                        <li><a href="../noclip-crafting/index.html"><i class="fas fa-hammer"></i> noclip_crafting</a></li>
+                        <li><a href="index.html" class="active"><i class="fas fa-pills"></i> noclip_drugs</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section">
+                    <span class="nav-section-title">noclip_drugs</span>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-book"></i> Overview</a></li>
+                        <li><a href="installation.html"><i class="fas fa-download"></i> Installation</a></li>
+                        <li><a href="configuration.html"><i class="fas fa-cogs"></i> Configuration</a></li>
+                        <li><a href="exports.html"><i class="fas fa-code"></i> Exports</a></li>
+                        <li><a href="troubleshooting.html"><i class="fas fa-tools"></i> Troubleshooting</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section">
+                    <span class="nav-section-title">Resources</span>
+                    <ul>
+                        <li><a href="../troubleshooting.html"><i class="fas fa-tools"></i> Troubleshooting</a></li>
+                        <li><a href="https://github.com/NoClip-Labs" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>noclip_drugs</span>
+            </div>
+
+            <div class="docs-content">
+                <h1><i class="fas fa-pills"></i> noclip_drugs</h1>
+                <p>A comprehensive drug manufacturing and distribution script for FiveM servers using QBCore framework with ox_lib and ox_inventory support, featuring addiction mechanics, dynamic pricing, and comprehensive drug effects.</p>
+
+                <div class="feature-highlights">
+                    <div class="highlight-card">
+                        <i class="fas fa-leaf"></i>
+                        <h3>Harvesting System</h3>
+                        <p>Configurable harvest locations for different types of drugs</p>
+                    </div>
+                    <div class="highlight-card">
+                        <i class="fas fa-user-tie"></i>
+                        <h3>Dealer System</h3>
+                        <p>NPC dealers with configurable inventory and dynamic pricing</p>
+                    </div>
+                    <div class="highlight-card">
+                        <i class="fas fa-flask"></i>
+                        <h3>Processing</h3>
+                        <p>Dedicated areas for crafting drugs with specific recipes</p>
+                    </div>
+                    <div class="highlight-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Addiction System</h3>
+                        <p>Comprehensive addiction mechanics with withdrawal effects</p>
+                    </div>
+                </div>
+
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Configurable Harvest Locations:</strong> Set up multiple locations for harvesting different types of drugs</li>
+                    <li><strong>Dealer Peds:</strong> NPC dealers with configurable inventory and pricing</li>
+                    <li><strong>Processing Locations:</strong> Dedicated areas for crafting drugs with specific recipes</li>
+                    <li><strong>Recipe System:</strong> Complex recipes requiring specific ingredients and tools</li>
+                    <li><strong>Inventory Integration:</strong> Full support for ox_inventory with fallback to QBCore inventory</li>
+                    <li><strong>Target System:</strong> Uses ox_target for intuitive player interactions</li>
+                    <li><strong>Blip System:</strong> Automatic map markers for all locations</li>
+                    <li><strong>Admin Commands:</strong> Built-in admin tools for managing items</li>
+                    <li><strong>Drug Selling System:</strong> Sell drugs to peds with dynamic reactions</li>
+                    <li><strong>Consumables System:</strong> Drug effects, addiction mechanics, and cure items</li>
+                    <li><strong>Drug Influence Persistence:</strong> Active drug effects persist across server restarts</li>
+                    <li><strong>Dynamic Pricing:</strong> Market-based pricing system with supply and demand</li>
+                    <li><strong>Multi-Language Support:</strong> Localization system for different languages</li>
+                    <li><strong>Comprehensive Logging:</strong> Detailed activity logging for administration</li>
+                    <li><strong>Police Integration:</strong> Built-in support for police alerts and dispatch</li>
+                </ul>
+
+                <h2>Dependencies</h2>
+                <ul>
+                    <li><code>qb-core</code> - QBCore Framework</li>
+                    <li><code>ox_lib</code> - Modern UI library</li>
+                    <li><code>ox_target</code> - Advanced targeting system</li>
+                    <li><code>ox_inventory</code> - Modern inventory system (optional, has fallback)</li>
+                </ul>
+
+                <h2>Quick Start</h2>
+                <ol>
+                    <li>Place the <code>noclip_drugs</code> folder in your <code>resources</code> directory</li>
+                    <li>Add <code>ensure noclip_drugs</code> to your <code>server.cfg</code></li>
+                    <li>Configure the script in <code>shared/config.lua</code></li>
+                    <li><strong>If using ox_inventory:</strong> Add the items to <code>ox_inventory/data/items.lua</code></li>
+                    <li>Restart your server</li>
+                </ol>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Note:</strong> If you're using ox_inventory, make sure to add all required items. See the <a href="installation.html">Installation Guide</a> for detailed instructions.
+                </div>
+
+                <h2>Core Systems</h2>
+
+                <h3>Drug Selling System</h3>
+                <p>The script includes a comprehensive drug selling system where players can sell drugs to NPCs (peds) with various outcomes:</p>
+                <ul>
+                    <li><strong>Toggle Mode:</strong> Use <code>/selldrugs</code> command to toggle selling mode</li>
+                    <li><strong>Automatic Detection:</strong> Automatically detects available drugs in inventory</li>
+                    <li><strong>Dynamic Reactions:</strong> Configurable chances for different ped reactions</li>
+                    <li><strong>Police Integration:</strong> Built-in support for ps-dispatch alerts</li>
+                    <li><strong>Drug Recovery:</strong> System for recovering drugs from dead peds</li>
+                </ul>
+
+                <h4>Ped Reactions</h4>
+                <ul>
+                    <li><strong>Accept (35%):</strong> Ped buys drugs and gives money</li>
+                    <li><strong>Deny (25%):</strong> Ped refuses and walks away</li>
+                    <li><strong>Call Cops (20%):</strong> Ped calls police (ps-dispatch alert)</li>
+                    <li><strong>Attack (20%):</strong> Ped attacks player and steals drugs</li>
+                </ul>
+
+                <h3>Consumables System</h3>
+                <p>Advanced drug consumption system with realistic effects and addiction mechanics:</p>
+                <ul>
+                    <li><strong>Drug Effects:</strong> Each drug has configurable effects on player stats</li>
+                    <li><strong>Addiction System:</strong> Players can become addicted with withdrawal effects</li>
+                    <li><strong>Cure Items:</strong> Items to cure addictions (general and specific)</li>
+                    <li><strong>Animations & Effects:</strong> Custom animations and visual effects</li>
+                    <li><strong>Progress Bars:</strong> Visual feedback during drug consumption</li>
+                </ul>
+
+                <h4>Drug Types</h4>
+                <ul>
+                    <li><strong>Weed Joint:</strong> Heals health, reduces stress, boosts stamina</li>
+                    <li><strong>Cocaine Powder:</strong> Boosts stamina, reduces stress, increases speed</li>
+                    <li><strong>Meth Crystal:</strong> Maximum effects with high addiction risk</li>
+                </ul>
+
+                <h3>Drug Influence Persistence</h3>
+                <p>Comprehensive drug influence tracking that persists across server restarts:</p>
+                <ul>
+                    <li><strong>Influence Tracking:</strong> Active drug effects are tracked and saved</li>
+                    <li><strong>Persistence:</strong> Data persists across server restarts and disconnects</li>
+                    <li><strong>Automatic Restoration:</strong> Effects are restored when players reconnect</li>
+                    <li><strong>Expiration Handling:</strong> Expired influences are automatically cleaned up</li>
+                    <li><strong>Admin Management:</strong> Comprehensive admin commands for management</li>
+                </ul>
+
+                <h2>Configuration Overview</h2>
+                <p>The script is highly configurable with options for:</p>
+                <ul>
+                    <li><strong>Debug Mode:</strong> Enable detailed logging for troubleshooting</li>
+                    <li><strong>Language Settings:</strong> Multi-language support with easy customization</li>
+                    <li><strong>Harvest Locations:</strong> Configure multiple harvest spots for different drugs</li>
+                    <li><strong>Dealer Configuration:</strong> Set up NPC dealers with custom inventories</li>
+                    <li><strong>Processing Locations:</strong> Configure drug processing areas</li>
+                    <li><strong>Drug Effects:</strong> Customize effects for each drug type</li>
+                    <li><strong>Addiction Settings:</strong> Configure addiction thresholds and withdrawal effects</li>
+                    <li><strong>Market Pricing:</strong> Set up dynamic pricing system</li>
+                </ul>
+
+                <div class="next-steps">
+                    <h3>Next Steps</h3>
+                    <div class="step-links">
+                        <a href="installation.html" class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            Installation Guide
+                        </a>
+                        <a href="configuration.html" class="btn btn-primary">
+                            <i class="fas fa-cogs"></i>
+                            Configuration
+                        </a>
+                        <a href="exports.html" class="btn btn-primary">
+                            <i class="fas fa-code"></i>
+                            Exports & API
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html> 

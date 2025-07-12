@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation - noclip_crafting</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-code"></i> NoClip Labs</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-section">
+                    <span class="nav-section-title">Projects</span>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-hammer"></i> noclip_crafting</a></li>
+                        <li><a href="../noclip-drugs/index.html"><i class="fas fa-pills"></i> noclip_drugs</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section">
+                    <span class="nav-section-title">noclip_crafting</span>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-book"></i> Overview</a></li>
+                        <li><a href="installation.html" class="active"><i class="fas fa-download"></i> Installation</a></li>
+                        <li><a href="configuration.html"><i class="fas fa-cogs"></i> Configuration</a></li>
+                        <li><a href="exports.html"><i class="fas fa-code"></i> Exports</a></li>
+                        <li><a href="troubleshooting.html"><i class="fas fa-tools"></i> Troubleshooting</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section">
+                    <span class="nav-section-title">Resources</span>
+                    <ul>
+                        <li><a href="../troubleshooting.html"><i class="fas fa-tools"></i> Troubleshooting</a></li>
+                        <li><a href="https://github.com/NoClip-Labs" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="index.html">noclip_crafting</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Installation</span>
+            </div>
+
+            <div class="docs-content">
+                <h1><i class="fas fa-download"></i> Installation Guide</h1>
+                <p>Follow this comprehensive guide to install and set up noclip_crafting on your FiveM server.</p>
+
+                <h2>Prerequisites</h2>
+                <p>Before installing noclip_crafting, ensure you have the following dependencies installed and configured:</p>
+                <ul>
+                    <li><strong>QBCore Framework:</strong> Latest version of QBCore</li>
+                    <li><strong>ox_lib:</strong> Modern UI library for FiveM</li>
+                    <li><strong>ox_target:</strong> Advanced targeting system</li>
+                    <li><strong>ox_inventory:</strong> Modern inventory system</li>
+                </ul>
+
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Important:</strong> Make sure all dependencies are properly installed and configured before proceeding with the installation.
+                </div>
+
+                <h2>Step 1: Download and Extract</h2>
+                <ol>
+                    <li>Download the latest version of noclip_crafting</li>
+                    <li>Extract the files to your server's <code>resources</code> directory</li>
+                    <li>Ensure the folder is named <code>noclip_crafting</code></li>
+                </ol>
+
+                <h2>Step 2: Server Configuration</h2>
+                <p>Add the following line to your <code>server.cfg</code> file:</p>
+                <pre><code>ensure noclip_crafting</code></pre>
+                
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Note:</strong> Make sure to add this line after the <code>[qb]</code> and <code>[standalone]</code> sections in your server.cfg.
+                </div>
+
+                <h2>Step 3: ox_inventory Items</h2>
+                <p>Add the following items to your <code>ox_inventory/data/items.lua</code> file:</p>
+                <pre><code>-- Noclip-Crafting
+["craftrecipe"] = {
+    name = "craftrecipe",
+    label = "Crafting Recipe",
+    weight = 100,
+    type = "item",
+    image = "blueprint.png",
+    unique = true,
+    useable = false,
+    shouldClose = false,
+    description = "Crafting Recipe"
+},
+["paper"] = {
+    name = "paper",
+    label = "Roll of Paper",
+    weight = 100,
+    type = "item",
+    image = "paperroll.png",
+    unique = false,
+    useable = false,
+    shouldClose = false,
+    description = ""
+}</code></pre>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Note:</strong> You'll need to add the corresponding images to your <code>ox_inventory/web/images</code> folder.
+                </div>
+
+                <h2>Step 4: Configuration</h2>
+                <p>Configure the script by editing the <code>config.lua</code> file:</p>
+                <ol>
+                    <li>Open <code>config.lua</code> in your preferred text editor</li>
+                    <li>Review and modify the settings according to your server's needs</li>
+                    <li>Set up crafting locations and recipes</li>
+                    <li>Configure job restrictions if needed</li>
+                    <li>Set up the skill system parameters</li>
+                </ol>
+
+                <h3>Basic Configuration Example</h3>
+                <pre><code>Config = {}
+
+-- Debug mode
+Config.Debug = false
+
+-- Language settings
+Config.Language = 'en'
+
+-- Skill system
+Config.SkillSystem = {
+    enabled = true,
+    maxLevel = 100,
+    experienceMultiplier = 1.0,
+    baseExp = 100,
+    expMultiplier = 1.5
+}
+
+-- Crafting locations
+Config.CraftingLocations = {
+    {
+        name = "Basic Crafting Bench",
+        coords = { vector4(x, y, z, heading) },
+        prop = `prop_tool_bench02`,
+        craftingTable = {
+            -- Your recipes here
+        }
+    }
+}</code></pre>
+
+                <h2>Step 5: Adding New Locations</h2>
+                <p>To add new crafting locations:</p>
+                <ol>
+                    <li>Copy an existing location entry in <code>config.lua</code></li>
+                    <li>Modify the coordinates, name, and recipes</li>
+                    <li>Set appropriate job restrictions if needed</li>
+                    <li>Add blip configuration for map visibility</li>
+                </ol>
+
+                <h3>Location Configuration Example</h3>
+                <pre><code>{
+    name = "Advanced Electronics Bench",
+    coords = { vector4(x, y, z, heading) },
+    prop = `prop_tool_bench02`,
+    requiredItems = {
+        ["electronics_toolkit"] = 1,
+        ["soldering_iron"] = 1,
+    },
+    jobRestriction = {
+        job = "mechanic",
+        grade = 2
+    },
+    craftingTable = {
+        ["advanced_circuit"] = {
+            amount = 1,
+            time = 5000,
+            requires = {
+                ["copper_wire"] = 3,
+                ["silicon_chip"] = 2,
+                ["plastic"] = 1
+            }
+        }
+    }
+}</code></pre>
+
+                <h2>Step 6: Item Requirements System</h2>
+                <p>The item requirement system allows you to restrict access to crafting benches based on whether players have specific items:</p>
+                <ul>
+                    <li><strong>Single Item Requirement:</strong> Require one specific item</li>
+                    <li><strong>Multiple Items (OR Logic):</strong> Require any one of several items</li>
+                    <li><strong>No Requirements:</strong> Allow access without any items</li>
+                </ul>
+
+                <h3>Item Requirement Examples</h3>
+                <pre><code>-- Single item requirement
+requiredItems = {
+    ["crafting_toolkit"] = 1,
+}
+
+-- Multiple items (OR logic)
+requiredItems = {
+    ["electronics_toolkit"] = 1, -- OR
+    ["soldering_iron"] = 1, -- OR
+    ["circuit_board"] = 5, -- OR (needs 5 circuit boards)
+}
+
+-- No requirements (default)
+-- Simply omit the requiredItems field</code></pre>
+
+                <h2>Step 7: Resource Dependencies</h2>
+                <p>For optional resource dependencies, add the <code>requiredResource</code> field:</p>
+                <pre><code>{
+    name = "Lumberjack Crafting",
+    requiredResource = "jim-lumberjack", -- Only loads if this resource is started
+    coords = { vector4(x, y, z, heading) },
+    -- ... rest of configuration
+}</code></pre>
+
+                <h2>Step 8: Testing</h2>
+                <p>After installation, test the script:</p>
+                <ol>
+                    <li>Restart your server</li>
+                    <li>Check the server console for any error messages</li>
+                    <li>Visit a crafting location in-game</li>
+                    <li>Test the crafting functionality</li>
+                    <li>Verify job restrictions work correctly</li>
+                    <li>Test the skill system if enabled</li>
+                </ol>
+
+                <h2>Troubleshooting</h2>
+                <p>If you encounter issues during installation:</p>
+                <ul>
+                    <li>Check that all dependencies are properly installed</li>
+                    <li>Verify the resource name in server.cfg matches the folder name</li>
+                    <li>Ensure all required items are added to ox_inventory</li>
+                    <li>Check the server console for error messages</li>
+                    <li>Enable debug mode for detailed logging</li>
+                </ul>
+
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i>
+                    <strong>Success!</strong> If you've followed all steps and the script is working correctly, you're ready to start customizing it for your server.
+                </div>
+
+                <div class="next-steps">
+                    <h3>Next Steps</h3>
+                    <div class="step-links">
+                        <a href="configuration.html" class="btn btn-primary">
+                            <i class="fas fa-cogs"></i>
+                            Configuration Guide
+                        </a>
+                        <a href="exports.html" class="btn btn-primary">
+                            <i class="fas fa-code"></i>
+                            Exports & API
+                        </a>
+                        <a href="troubleshooting.html" class="btn btn-primary">
+                            <i class="fas fa-tools"></i>
+                            Troubleshooting
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html> 

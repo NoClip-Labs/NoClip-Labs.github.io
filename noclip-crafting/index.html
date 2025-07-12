@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>noclip_crafting - Documentation</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-code"></i> NoClip Labs</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-section">
+                    <span class="nav-section-title">Projects</span>
+                    <ul>
+                        <li><a href="index.html" class="active"><i class="fas fa-hammer"></i> noclip_crafting</a></li>
+                        <li><a href="../noclip-drugs/index.html"><i class="fas fa-pills"></i> noclip_drugs</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section">
+                    <span class="nav-section-title">noclip_crafting</span>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-book"></i> Overview</a></li>
+                        <li><a href="installation.html"><i class="fas fa-download"></i> Installation</a></li>
+                        <li><a href="configuration.html"><i class="fas fa-cogs"></i> Configuration</a></li>
+                        <li><a href="exports.html"><i class="fas fa-code"></i> Exports</a></li>
+                        <li><a href="troubleshooting.html"><i class="fas fa-tools"></i> Troubleshooting</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section">
+                    <span class="nav-section-title">Resources</span>
+                    <ul>
+                        <li><a href="../troubleshooting.html"><i class="fas fa-tools"></i> Troubleshooting</a></li>
+                        <li><a href="https://github.com/NoClip-Labs" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>noclip_crafting</span>
+            </div>
+
+            <div class="docs-content">
+                <h1><i class="fas fa-hammer"></i> noclip_crafting</h1>
+                <p>A comprehensive crafting script for FiveM servers with QBCore and OX integration, featuring multiple locations, job-based access, blueprint system, and skill progression.</p>
+
+                <div class="feature-highlights">
+                    <div class="highlight-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Multiple Locations</h3>
+                        <p>Configure different crafting benches with unique recipes and requirements</p>
+                    </div>
+                    <div class="highlight-card">
+                        <i class="fas fa-user-tie"></i>
+                        <h3>Job-Based Access</h3>
+                        <p>Restrict crafting to specific jobs and job grades</p>
+                    </div>
+                    <div class="highlight-card">
+                        <i class="fas fa-scroll"></i>
+                        <h3>Blueprint System</h3>
+                        <p>Support for one-time use crafting recipes</p>
+                    </div>
+                    <div class="highlight-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Skill System</h3>
+                        <p>Experience-based progression with level requirements</p>
+                    </div>
+                </div>
+
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>Multiple Crafting Locations:</strong> Configure different crafting benches with unique recipes</li>
+                    <li><strong>Job-Based Access:</strong> Restrict crafting to specific jobs and job grades</li>
+                    <li><strong>Blueprint System:</strong> Support for one-time use crafting recipes</li>
+                    <li><strong>Toolbox Integration:</strong> Use existing toolboxes as crafting locations</li>
+                    <li><strong>Debug Mode:</strong> Enable detailed logging for troubleshooting</li>
+                    <li><strong>Multi-Language Support:</strong> Localization system for different languages</li>
+                    <li><strong>Animation Support:</strong> Custom animations for crafting processes</li>
+                    <li><strong>Progress Bars:</strong> Visual feedback during crafting with ox_lib</li>
+                    <li><strong>Resource Dependencies:</strong> Support for other scripts with conditional loading</li>
+                    <li><strong>Advanced Recipe Options:</strong> Per-recipe job restrictions, custom animations, and timing</li>
+                    <li><strong>Menu Lock System:</strong> Prevents multiple crafting operations simultaneously</li>
+                    <li><strong>ox_lib Integration:</strong> Modern menu system with context menus</li>
+                    <li><strong>ox_target Integration:</strong> Advanced targeting system for seamless interaction</li>
+                    <li><strong>ox_inventory Integration:</strong> Modern inventory system with proper item management</li>
+                    <li><strong>Anti-Dupe Protection:</strong> Server-side validation and dupe detection</li>
+                    <li><strong>Comprehensive Logging:</strong> Detailed activity logging for administration</li>
+                    <li><strong>Encryption Ready:</strong> Prepared for script encryption with separated editable functions</li>
+                    <li><strong>Skill System:</strong> Experience-based progression with level requirements</li>
+                    <li><strong>Item Requirements:</strong> Require specific items to access crafting benches</li>
+                </ul>
+
+                <h2>Dependencies</h2>
+                <ul>
+                    <li><code>qb-core</code> - QBCore Framework</li>
+                    <li><code>ox_lib</code> - Modern UI library</li>
+                    <li><code>ox_target</code> - Advanced targeting system</li>
+                    <li><code>ox_inventory</code> - Modern inventory system</li>
+                </ul>
+
+                <h2>Quick Start</h2>
+                <ol>
+                    <li>Place the <code>noclip_crafting</code> folder in your <code>resources</code> directory</li>
+                    <li>Add <code>ensure noclip_crafting</code> to your <code>server.cfg</code></li>
+                    <li>Add required items to your <code>ox_inventory/data/items.lua</code></li>
+                    <li>Configure the <code>config.lua</code> file</li>
+                    <li>Restart your server</li>
+                </ol>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Note:</strong> Make sure to add the required items to your ox_inventory configuration. See the <a href="installation.html">Installation Guide</a> for detailed instructions.
+                </div>
+
+                <h2>Configuration Overview</h2>
+                <p>The script is highly configurable with options for:</p>
+                <ul>
+                    <li><strong>Debug Mode:</strong> Enable detailed logging for troubleshooting</li>
+                    <li><strong>Language Settings:</strong> Multi-language support with easy customization</li>
+                    <li><strong>Crafting Locations:</strong> Configure multiple benches with unique recipes</li>
+                    <li><strong>Job Restrictions:</strong> Set job and grade requirements for each location</li>
+                    <li><strong>Skill System:</strong> Configure experience gain and level requirements</li>
+                    <li><strong>Item Requirements:</strong> Require specific items to access crafting benches</li>
+                </ul>
+
+                <div class="next-steps">
+                    <h3>Next Steps</h3>
+                    <div class="step-links">
+                        <a href="installation.html" class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            Installation Guide
+                        </a>
+                        <a href="configuration.html" class="btn btn-primary">
+                            <i class="fas fa-cogs"></i>
+                            Configuration
+                        </a>
+                        <a href="exports.html" class="btn btn-primary">
+                            <i class="fas fa-code"></i>
+                            Exports & API
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html> 

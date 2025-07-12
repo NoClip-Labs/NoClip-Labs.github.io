@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exports & API - noclip_crafting</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-code"></i> NoClip Labs</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-section">
+                    <span class="nav-section-title">Projects</span>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-hammer"></i> noclip_crafting</a></li>
+                        <li><a href="../noclip-drugs/index.html"><i class="fas fa-pills"></i> noclip_drugs</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section">
+                    <span class="nav-section-title">noclip_crafting</span>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-book"></i> Overview</a></li>
+                        <li><a href="installation.html"><i class="fas fa-download"></i> Installation</a></li>
+                        <li><a href="configuration.html"><i class="fas fa-cogs"></i> Configuration</a></li>
+                        <li><a href="exports.html" class="active"><i class="fas fa-code"></i> Exports</a></li>
+                        <li><a href="troubleshooting.html"><i class="fas fa-tools"></i> Troubleshooting</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section">
+                    <span class="nav-section-title">Resources</span>
+                    <ul>
+                        <li><a href="../troubleshooting.html"><i class="fas fa-tools"></i> Troubleshooting</a></li>
+                        <li><a href="https://github.com/NoClip-Labs" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="index.html">noclip_crafting</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Exports & API</span>
+            </div>
+
+            <div class="docs-content">
+                <h1><i class="fas fa-code"></i> Exports & API</h1>
+                <p>noclip_crafting provides a comprehensive API for integrating with other scripts and customizing functionality.</p>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Note:</strong> All exports are available after the resource has fully loaded. Make sure to wait for the resource to start before calling exports.
+                </div>
+
+                <h2>Server-Side Exports</h2>
+                <p>These exports are available on the server-side and can be called from other server scripts.</p>
+
+                <h3>Player Skill Management</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Export</th>
+                            <th>Parameters</th>
+                            <th>Returns</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>GetPlayerSkill</code></td>
+                            <td><code>playerId, skillType</code></td>
+                            <td><code>number</code></td>
+                            <td>Get player's skill level for a specific crafting type</td>
+                        </tr>
+                        <tr>
+                            <td><code>SetPlayerSkill</code></td>
+                            <td><code>playerId, skillType, level</code></td>
+                            <td><code>boolean</code></td>
+                            <td>Set player's skill level for a specific crafting type</td>
+                        </tr>
+                        <tr>
+                            <td><code>AddPlayerSkill</code></td>
+                            <td><code>playerId, skillType, amount</code></td>
+                            <td><code>boolean</code></td>
+                            <td>Add experience to player's skill</td>
+                        </tr>
+                        <tr>
+                            <td><code>GetPlayerExperience</code></td>
+                            <td><code>playerId, skillType</code></td>
+                            <td><code>number</code></td>
+                            <td>Get player's current experience for a skill</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Example Usage</h4>
+                <pre><code>-- Get player's weapon crafting skill
+local skillLevel = exports['noclip_crafting']:GetPlayerSkill(playerId, 'weapon_crafting')
+
+-- Add experience to player's electronics skill
+local success = exports['noclip_crafting']:AddPlayerSkill(playerId, 'electronics', 50)
+
+-- Set player's mechanics skill to level 10
+local success = exports['noclip_crafting']:SetPlayerSkill(playerId, 'mechanics', 10)</code></pre>
+
+                <h3>Crafting Location Management</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Export</th>
+                            <th>Parameters</th>
+                            <th>Returns</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>GetCraftingLocations</code></td>
+                            <td><code>none</code></td>
+                            <td><code>table</code></td>
+                            <td>Get all configured crafting locations</td>
+                        </tr>
+                        <tr>
+                            <td><code>GetCraftingLocation</code></td>
+                            <td><code>locationId</code></td>
+                            <td><code>table</code></td>
+                            <td>Get specific crafting location data</td>
+                        </tr>
+                        <tr>
+                            <td><code>AddCraftingLocation</code></td>
+                            <td><code>locationData</code></td>
+                            <td><code>boolean</code></td>
+                            <td>Add a new crafting location dynamically</td>
+                        </tr>
+                        <tr>
+                            <td><code>RemoveCraftingLocation</code></td>
+                            <td><code>locationId</code></td>
+                            <td><code>boolean</code></td>
+                            <td>Remove a crafting location</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Example Usage</h4>
+                <pre><code>-- Get all crafting locations
+local locations = exports['noclip_crafting']:GetCraftingLocations()
+
+-- Add a new crafting location
+local newLocation = {
+    name = "Custom Bench",
+    coords = { vector4(100.0, 200.0, 30.0, 90.0) },
+    prop = `prop_tool_bench02`,
+    craftingTable = {
+        ["custom_item"] = {
+            amount = 1,
+            time = 3000,
+            requires = {
+                ["material1"] = 2,
+                ["material2"] = 1
+            }
+        }
+    }
+}
+local success = exports['noclip_crafting']:AddCraftingLocation(newLocation)</code></pre>
+
+                <h3>Recipe Management</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Export</th>
+                            <th>Parameters</th>
+                            <th>Returns</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>GetRecipe</code></td>
+                            <td><code>locationId, itemName</code></td>
+                            <td><code>table</code></td>
+                            <td>Get recipe data for a specific item</td>
+                        </tr>
+                        <tr>
+                            <td><code>AddRecipe</code></td>
+                            <td><code>locationId, itemName, recipeData</code></td>
+                            <td><code>boolean</code></td>
+                            <td>Add a new recipe to a location</td>
+                        </tr>
+                        <tr>
+                            <td><code>RemoveRecipe</code></td>
+                            <td><code>locationId, itemName</code></td>
+                            <td><code>boolean</code></td>
+                            <td>Remove a recipe from a location</td>
+                        </tr>
+                        <tr>
+                            <td><code>UpdateRecipe</code></td>
+                            <td><code>locationId, itemName, recipeData</code></td>
+                            <td><code>boolean</code></td>
+                            <td>Update an existing recipe</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Example Usage</h4>
+                <pre><code>-- Add a new recipe to location 1
+local recipeData = {
+    amount = 1,
+    time = 5000,
+    requires = {
+        ["steel"] = 3,
+        ["electronics"] = 2
+    },
+    jobRestriction = {
+        job = "mechanic",
+        grade = 1
+    },
+    skillRequirement = {
+        type = "mechanics",
+        level = 5
+    }
+}
+local success = exports['noclip_crafting']:AddRecipe(1, "advanced_tool", recipeData)
+
+-- Get recipe data
+local recipe = exports['noclip_crafting']:GetRecipe(1, "advanced_tool")</code></pre>
+
+                <h3>Utility Functions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Export</th>
+                            <th>Parameters</th>
+                            <th>Returns</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>CanPlayerCraft</code></td>
+                            <td><code>playerId, locationId, itemName</code></td>
+                            <td><code>boolean, string</code></td>
+                            <td>Check if player can craft an item (returns success and reason)</td>
+                        </tr>
+                        <tr>
+                            <td><code>GetPlayerCraftingHistory</code></td>
+                            <td><code>playerId</code></td>
+                            <td><code>table</code></td>
+                            <td>Get player's crafting history</td>
+                        </tr>
+                        <tr>
+                            <td><code>ResetPlayerSkills</code></td>
+                            <td><code>playerId</code></td>
+                            <td><code>boolean</code></td>
+                            <td>Reset all player skills to 0</td>
+                        </tr>
+                        <tr>
+                            <td><code>GetCraftingStats</code></td>
+                            <td><code>none</code></td>
+                            <td><code>table</code></td>
+                            <td>Get overall crafting statistics</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Example Usage</h4>
+                <pre><code>-- Check if player can craft an item
+local canCraft, reason = exports['noclip_crafting']:CanPlayerCraft(playerId, 1, "advanced_tool")
+if not canCraft then
+    print("Cannot craft: " .. reason)
+end
+
+-- Get player's crafting history
+local history = exports['noclip_crafting']:GetPlayerCraftingHistory(playerId)
+
+-- Get overall stats
+local stats = exports['noclip_crafting']:GetCraftingStats()</code></pre>
+
+                <h2>Client-Side Exports</h2>
+                <p>These exports are available on the client-side and can be called from other client scripts.</p>
+
+                <h3>UI Management</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Export</th>
+                            <th>Parameters</th>
+                            <th>Returns</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>OpenCraftingMenu</code></td>
+                            <td><code>locationId</code></td>
+                            <td><code>boolean</code></td>
+                            <td>Open the crafting menu for a specific location</td>
+                        </tr>
+                        <tr>
+                            <td><code>CloseCraftingMenu</code></td>
+                            <td><code>none</code></td>
+                            <td><code>boolean</code></td>
+                            <td>Close the currently open crafting menu</td>
+                        </tr>
+                        <tr>
+                            <td><code>IsCraftingMenuOpen</code></td>
+                            <td><code>none</code></td>
+                            <td><code>boolean</code></td>
+                            <td>Check if crafting menu is currently open</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Example Usage</h4>
+                <pre><code>-- Open crafting menu for location 1
+local success = exports['noclip_crafting']:OpenCraftingMenu(1)
+
+-- Check if menu is open
+local isOpen = exports['noclip_crafting']:IsCraftingMenuOpen()
+
+-- Close the menu
+local success = exports['noclip_crafting']:CloseCraftingMenu()</code></pre>
+
+                <h3>Player Data</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Export</th>
+                            <th>Parameters</th>
+                            <th>Returns</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>GetLocalPlayerSkill</code></td>
+                            <td><code>skillType</code></td>
+                            <td><code>number</code></td>
+                            <td>Get local player's skill level</td>
+                        </tr>
+                        <tr>
+                            <td><code>GetLocalPlayerExperience</code></td>
+                            <td><code>skillType</code></td>
+                            <td><code>number</code></td>
+                            <td>Get local player's experience</td>
+                        </tr>
+                        <tr>
+                            <td><code>GetAvailableLocations</code></td>
+                            <td><code>none</code></td>
+                            <td><code>table</code></td>
+                            <td>Get locations available to the local player</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Example Usage</h4>
+                <pre><code>-- Get local player's weapon crafting skill
+local skillLevel = exports['noclip_crafting']:GetLocalPlayerSkill('weapon_crafting')
+
+-- Get available locations for local player
+local locations = exports['noclip_crafting']:GetAvailableLocations()</code></pre>
+
+                <h2>Events</h2>
+                <p>noclip_crafting also provides events that you can listen to for custom functionality.</p>
+
+                <h3>Server Events</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Event</th>
+                            <th>Parameters</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>noclip_crafting:itemCrafted</code></td>
+                            <td><code>playerId, itemName, amount, locationId</code></td>
+                            <td>Triggered when a player successfully crafts an item</td>
+                        </tr>
+                        <tr>
+                            <td><code>noclip_crafting:skillLevelUp</code></td>
+                            <td><code>playerId, skillType, newLevel</code></td>
+                            <td>Triggered when a player levels up a skill</td>
+                        </tr>
+                        <tr>
+                            <td><code>noclip_crafting:craftingFailed</code></td>
+                            <td><code>playerId, itemName, reason</code></td>
+                            <td>Triggered when crafting fails</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Client Events</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Event</th>
+                            <th>Parameters</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>noclip_crafting:menuOpened</code></td>
+                            <td><code>locationId</code></td>
+                            <td>Triggered when crafting menu opens</td>
+                        </tr>
+                        <tr>
+                            <td><code>noclip_crafting:menuClosed</code></td>
+                            <td><code>none</code></td>
+                            <td>Triggered when crafting menu closes</td>
+                        </tr>
+                        <tr>
+                            <td><code>noclip_crafting:craftingStarted</code></td>
+                            <td><code>itemName, time</code></td>
+                            <td>Triggered when crafting process starts</td>
+                        </tr>
+                        <tr>
+                            <td><code>noclip_crafting:craftingCompleted</code></td>
+                            <td><code>itemName, amount</code></td>
+                            <td>Triggered when crafting process completes</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Example Usage</h4>
+                <pre><code>-- Server-side event listener
+RegisterNetEvent('noclip_crafting:itemCrafted')
+AddEventHandler('noclip_crafting:itemCrafted', function(playerId, itemName, amount, locationId)
+    print(string.format("Player %s crafted %dx %s at location %d", playerId, amount, itemName, locationId))
+    -- Add your custom logic here
+end)
+
+-- Client-side event listener
+RegisterNetEvent('noclip_crafting:craftingCompleted')
+AddEventHandler('noclip_crafting:craftingCompleted', function(itemName, amount)
+    print(string.format("Successfully crafted %dx %s", amount, itemName))
+    -- Add your custom logic here
+end)</code></pre>
+
+                <h2>Integration Examples</h2>
+                <p>Here are some practical examples of how to integrate noclip_crafting with other scripts.</p>
+
+                <h3>Job Integration</h3>
+                <pre><code>-- Add crafting recipes based on job
+RegisterNetEvent('QBCore:Server:OnJobUpdate')
+AddEventHandler('QBCore:Server:OnJobUpdate', function(source, newJob)
+    local Player = QBCore.Functions.GetPlayer(source)
+    if not Player then return end
+    
+    -- Add mechanic-specific recipes when player becomes mechanic
+    if newJob.name == "mechanic" then
+        local recipeData = {
+            amount = 1,
+            time = 3000,
+            requires = {
+                ["steel"] = 2,
+                ["electronics"] = 1
+            }
+        }
+        exports['noclip_crafting']:AddRecipe(1, "mechanic_tool", recipeData)
+    end
+end)</code></pre>
+
+                <h3>Skill-Based Rewards</h3>
+                <pre><code>-- Give rewards based on skill level
+RegisterNetEvent('noclip_crafting:skillLevelUp')
+AddEventHandler('noclip_crafting:skillLevelUp', function(playerId, skillType, newLevel)
+    local Player = QBCore.Functions.GetPlayer(playerId)
+    if not Player then return end
+    
+    -- Give rewards for reaching skill milestones
+    if newLevel == 10 then
+        Player.Functions.AddMoney('cash', 1000, 'skill-milestone')
+        TriggerClientEvent('QBCore:Notify', playerId, 'Congratulations! You reached level 10 in ' .. skillType, 'success')
+    elseif newLevel == 50 then
+        Player.Functions.AddMoney('cash', 5000, 'skill-milestone')
+        TriggerClientEvent('QBCore:Notify', playerId, 'Amazing! You reached level 50 in ' .. skillType, 'success')
+    end
+end)</code></pre>
+
+                <div class="next-steps">
+                    <h3>Next Steps</h3>
+                    <div class="step-links">
+                        <a href="configuration.html" class="btn btn-primary">
+                            <i class="fas fa-cogs"></i>
+                            Configuration Guide
+                        </a>
+                        <a href="troubleshooting.html" class="btn btn-primary">
+                            <i class="fas fa-tools"></i>
+                            Troubleshooting
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troubleshooting - NoClip Labs</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-code"></i> NoClip Labs</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-section">
+                    <span class="nav-section-title">Projects</span>
+                    <ul>
+                        <li><a href="noclip-crafting/index.html"><i class="fas fa-hammer"></i> noclip_crafting</a></li>
+                        <li><a href="noclip-drugs/index.html"><i class="fas fa-pills"></i> noclip_drugs</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section">
+                    <span class="nav-section-title">Resources</span>
+                    <ul>
+                        <li><a href="troubleshooting.html" class="active"><i class="fas fa-tools"></i> Troubleshooting</a></li>
+                        <li><a href="https://github.com/NoClip-Labs" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Troubleshooting</span>
+            </div>
+
+            <div class="docs-content">
+                <h1><i class="fas fa-tools"></i> Troubleshooting Guide</h1>
+                <p>This guide covers common issues and solutions for both noclip_crafting and noclip_drugs scripts.</p>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Before troubleshooting:</strong> Make sure you have the latest version of the script and all dependencies are properly installed.
+                </div>
+
+                <h2>General Issues</h2>
+
+                <h3>Script Not Starting</h3>
+                <div class="troubleshoot-item">
+                    <h4>Symptoms</h4>
+                    <ul>
+                        <li>Script doesn't appear in server console</li>
+                        <li>Error messages about missing dependencies</li>
+                        <li>Resource fails to start</li>
+                    </ul>
+                    
+                    <h4>Solutions</h4>
+                    <ol>
+                        <li><strong>Check Dependencies:</strong> Ensure all required resources are installed and started:
+                            <ul>
+                                <li><code>qb-core</code></li>
+                                <li><code>ox_lib</code></li>
+                                <li><code>ox_target</code></li>
+                                <li><code>ox_inventory</code> (optional for noclip_drugs)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Check Resource Order:</strong> Make sure the script is started after dependencies in your <code>server.cfg</code></li>
+                        <li><strong>Verify File Structure:</strong> Ensure all files are in the correct location and not corrupted</li>
+                        <li><strong>Check Console Errors:</strong> Look for specific error messages in the server console</li>
+                    </ol>
+                </div>
+
+                <h3>Performance Issues</h3>
+                <div class="troubleshoot-item">
+                    <h4>Symptoms</h4>
+                    <ul>
+                        <li>Server lag when using the script</li>
+                        <li>High CPU usage</li>
+                        <li>Slow response times</li>
+                    </ul>
+                    
+                    <h4>Solutions</h4>
+                    <ol>
+                        <li><strong>Enable Debug Mode:</strong> Set <code>Config.Debug = false</code> in production</li>
+                        <li><strong>Check Resource Usage:</strong> Monitor server performance with the script enabled/disabled</li>
+                        <li><strong>Optimize Configuration:</strong> Reduce the number of locations or simplify recipes</li>
+                        <li><strong>Update Dependencies:</strong> Ensure all OX resources are up to date</li>
+                    </ol>
+                </div>
+
+                <h2>noclip_crafting Specific Issues</h2>
+
+                <h3>Crafting Menu Not Opening</h3>
+                <div class="troubleshoot-item">
+                    <h4>Symptoms</h4>
+                    <ul>
+                        <li>No ox_target interaction appears</li>
+                        <li>Menu opens but shows no recipes</li>
+                        <li>Error messages in console</li>
+                    </ul>
+                    
+                    <h4>Solutions</h4>
+                    <ol>
+                        <li><strong>Check ox_target:</strong> Ensure ox_target is properly installed and configured</li>
+                        <li><strong>Verify Coordinates:</strong> Check that crafting location coordinates are correct</li>
+                        <li><strong>Check Job Restrictions:</strong> Ensure player has the required job/grade</li>
+                        <li><strong>Verify Item Requirements:</strong> Check if player has required items for the location</li>
+                        <li><strong>Check ox_inventory Items:</strong> Ensure all recipe items exist in ox_inventory</li>
+                    </ol>
+                </div>
+
+                <h3>Items Not Being Given/Removed</h3>
+                <div class="troubleshoot-item">
+                    <h4>Symptoms</h4>
+                    <ul>
+                        <li>Items not removed from inventory during crafting</li>
+                        <li>Crafted items not appearing in inventory</li>
+                        <li>Inventory full errors</li>
+                    </ul>
+                    
+                    <h4>Solutions</h4>
+                    <ol>
+                        <li><strong>Check ox_inventory Integration:</strong> Verify ox_inventory is properly configured</li>
+                        <li><strong>Check Item Names:</strong> Ensure item names match exactly between config and ox_inventory</li>
+                        <li><strong>Verify Inventory Space:</strong> Check if player has enough inventory space</li>
+                        <li><strong>Check Item Weight:</strong> Ensure items don't exceed weight limits</li>
+                        <li><strong>Enable Debug Mode:</strong> Set <code>Config.Debug = true</code> to see detailed logs</li>
+                    </ol>
+                </div>
+
+                <h3>Skill System Issues</h3>
+                <div class="troubleshoot-item">
+                    <h4>Symptoms</h4>
+                    <ul>
+                        <li>Skills not leveling up</li>
+                        <li>Experience not being saved</li>
+                        <li>Skill requirements not working</li>
+                    </ul>
+                    
+                    <h4>Solutions</h4>
+                    <ol>
+                        <li><strong>Check Skill System:</strong> Ensure <code>Config.SkillSystem.enabled = true</code></li>
+                        <li><strong>Verify Experience Gain:</strong> Check that recipes have <code>expGain</code> values set</li>
+                        <li><strong>Check Level Requirements:</strong> Ensure <code>levelRequirement</code> is set correctly</li>
+                        <li><strong>Check File Permissions:</strong> Ensure the script can write to the data directory</li>
+                        <li><strong>Reset Skills:</strong> Use admin command to reset player skills if corrupted</li>
+                    </ol>
+                </div>
+
+                <h2>noclip_drugs Specific Issues</h2>
+
+                <h3>Harvesting Not Working</h3>
+                <div class="troubleshoot-item">
+                    <h4>Symptoms</h4>
+                    <ul>
+                        <li>No harvest interaction available</li>
+                    </ul>
+                    
+                    <h4>Solutions</h4>
+                    <ol>
+                        <li><strong>Check Harvest Locations:</strong> Verify coordinates in <code>Config.HarvestLocations</code></li>
+                        <li><strong>Check ox_target:</strong> Ensure ox_target is working properly</li>
+                        <li><strong>Verify Item Configuration:</strong> Check that harvest items exist in ox_inventory</li>
+                        <li><strong>Check Radius Settings:</strong> Ensure harvest radius is appropriate</li>
+                    </ol>
+                </div>
+
+                <h3>Drug Selling Issues</h3>
+                <div class="troubleshoot-item">
+                    <h4>Symptoms</h4>
+                    <ul>
+                        <li><code>/selldrugs</code> command not working</li>
+                        <li>No peds responding to drug offers</li>
+                        <li>Police alerts not working</li>
+                    </ul>
+                    
+                    <h4>Solutions</h4>
+                    <ol>
+                        <li><strong>Check Command Registration:</strong> Verify the command is properly registered</li>
+                        <li><strong>Check Sellable Drugs:</strong> Ensure drugs are in <code>Config.SellableDrugs</code></li>
+                        <li><strong>Verify Police Integration:</strong> Check ps-dispatch configuration</li>
+                        <li><strong>Check Ped Spawning:</strong> Ensure peds are spawning correctly</li>
+                        <li><strong>Check Reaction Chances:</strong> Verify ped reaction configuration</li>
+                    </ol>
+                </div>
+
+                <h3>Addiction System Issues</h3>
+                <div class="troubleshoot-item">
+                    <h4>Symptoms</h4>
+                    <ul>
+                        <li>Addictions not being tracked</li>
+                        <li>Withdrawal effects not working</li>
+                        <li>Cure items not working</li>
+                    </ul>
+                    
+                    <h4>Solutions</h4>
+                    <ol>
+                        <li><strong>Check Addiction Configuration:</strong> Verify addiction thresholds in config</li>
+                        <li><strong>Check Drug Effects:</strong> Ensure drug effects are properly configured</li>
+                        <li><strong>Verify Cure Items:</strong> Check that cure items exist in ox_inventory</li>
+                        <li><strong>Check Data Persistence:</strong> Ensure addiction data is being saved</li>
+                        <li><strong>Use Admin Commands:</strong> Use <code>/addictioninfo</code> to check player status</li>
+                    </ol>
+                </div>
+
+                <h3>Drug Effects Not Working</h3>
+                <div class="troubleshoot-item">
+                    <h4>Symptoms</h4>
+                    <ul>
+                        <li>Drug consumption has no effects</li>
+                        <li>Effects not persisting across restarts</li>
+                        <li>Visual effects not appearing</li>
+                    </ul>
+                    
+                    <h4>Solutions</h4>
+                    <ol>
+                        <li><strong>Check Drug Configuration:</strong> Verify drug effects in <code>Consumables.Drugs</code></li>
+                        <li><strong>Check Effect Values:</strong> Ensure effect values are within valid ranges</li>
+                        <li><strong>Verify Animations:</strong> Check that animations are properly configured</li>
+                        <li><strong>Check Influence Persistence:</strong> Ensure influence system is enabled</li>
+                        <li><strong>Check Client Events:</strong> Verify client-side events are firing</li>
+                    </ol>
+                </div>
+
+                <h2>Common Error Messages</h2>
+
+                <h3>Server-Side Errors</h3>
+                <div class="error-section">
+                    <h4>"QBCore not found"</h4>
+                    <p><strong>Solution:</strong> Ensure QBCore is started before the script in server.cfg</p>
+                    
+                    <h4>"ox_inventory not found"</h4>
+                    <p><strong>Solution:</strong> Install ox_inventory or set <code>Config.UseOxInventory = false</code></p>
+                    
+                    <h4>"Invalid item name"</h4>
+                    <p><strong>Solution:</strong> Check that item names match exactly between config and ox_inventory</p>
+                    
+                    <h4>"Player not found"</h4>
+                    <p><strong>Solution:</strong> Ensure player is properly loaded before calling exports</p>
+                </div>
+
+                <h3>Client-Side Errors</h3>
+                <div class="error-section">
+                    <h4>"ox_target not found"</h4>
+                    <p><strong>Solution:</strong> Ensure ox_target is properly installed and started</p>
+                    
+                    <h4>"ox_lib not found"</h4>
+                    <p><strong>Solution:</strong> Install and configure ox_lib properly</p>
+                    
+                    <h4>"Invalid coordinates"</h4>
+                    <p><strong>Solution:</strong> Check that all coordinates in config are valid vector4 values</p>
+                </div>
+
+                <h2>Debugging Tips</h2>
+
+                <h3>Enable Debug Mode</h3>
+                <p>Set <code>Config.Debug = true</code> in your config file to get detailed logging:</p>
+                <pre><code>Config = {}
+Config.Debug = true  -- Enable detailed logging</code></pre>
+
+                <h3>Check Server Console</h3>
+                <p>Monitor the server console for error messages and debug information when issues occur.</p>
+
+                <h3>Use Admin Commands</h3>
+                <p>Both scripts include admin commands for debugging:</p>
+                <ul>
+                    <li><strong>noclip_crafting:</strong> <code>/craftingdebug</code>, <code>/resetskills [player_id]</code></li>
+                    <li><strong>noclip_drugs:</strong> <code>/addictioninfo [player_id]</code>, <code>/cureaddiction [player_id] [drug_type]</code></li>
+                </ul>
+
+                <h3>Check File Permissions</h3>
+                <p>Ensure the script has read/write permissions for its data directory.</p>
+
+                <h2>Getting Help</h2>
+                <p>If you're still experiencing issues after trying these solutions:</p>
+                <ol>
+                    <li><strong>Check the GitHub Issues:</strong> Search for similar problems in the repository</li>
+                    <li><strong>Enable Debug Mode:</strong> Get detailed logs to help identify the issue</li>
+                    <li><strong>Provide Information:</strong> When asking for help, include:
+                        <ul>
+                            <li>Script version</li>
+                            <li>Dependency versions</li>
+                            <li>Error messages</li>
+                            <li>Configuration snippets</li>
+                            <li>Steps to reproduce the issue</li>
+                        </ul>
+                    </li>
+                    <li><strong>Contact Support:</strong> Reach out through GitHub or Discord</li>
+                </ol>
+
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i>
+                    <strong>Remember:</strong> Most issues can be resolved by checking dependencies, configuration, and enabling debug mode for detailed logging.
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

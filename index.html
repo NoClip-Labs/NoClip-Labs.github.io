@@ -1,8 +1,128 @@
-<html>
-  <head>
-    <title>Placeholder</title>
-  </head>
-  <body>
-    <b>Hello, world!</b>
-  </body>
-</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoClip Labs - FiveM Development</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-code"></i> NoClip Labs</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-section">
+                    <span class="nav-section-title">Projects</span>
+                    <ul>
+                        <li><a href="noclip-crafting/index.html"><i class="fas fa-hammer"></i> noclip_crafting</a></li>
+                        <li><a href="noclip-drugs/index.html"><i class="fas fa-pills"></i> noclip_drugs</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section">
+                    <span class="nav-section-title">Resources</span>
+                    <ul>
+                        <li><a href="troubleshooting.html"><i class="fas fa-tools"></i> Troubleshooting</a></li>
+                        <li><a href="https://github.com/NoClip-Labs" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="page-header">
+                <h1>Welcome to NoClip Labs</h1>
+                <p>Professional FiveM development and high-quality scripts for the community</p>
+            </header>
+
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h2>About Our Team</h2>
+                    <p>NoClip Labs is dedicated to creating robust, feature-rich FiveM scripts that enhance the gaming experience for server owners and players alike. Our focus is on performance, reliability, and user experience.</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-rocket"></i>
+                            <h3>Performance Optimized</h3>
+                            <p>All our scripts are built with performance in mind, ensuring smooth gameplay even on busy servers.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>Secure & Reliable</h3>
+                            <p>Built-in anti-dupe protection and comprehensive validation to keep your server safe.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-cogs"></i>
+                            <h3>Highly Configurable</h3>
+                            <p>Extensive configuration options allow you to customize every aspect to fit your server's needs.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-headset"></i>
+                            <h3>Community Support</h3>
+                            <p>Active development and community support to help you get the most out of our scripts.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="projects-section">
+                <h2>Our Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <i class="fas fa-hammer"></i>
+                            <h3>noclip_crafting</h3>
+                        </div>
+                        <p>A comprehensive crafting script with multiple locations, job-based access, blueprint system, and skill progression.</p>
+                        <div class="project-features">
+                            <span class="feature-tag">Multi-location</span>
+                            <span class="feature-tag">Job-based</span>
+                            <span class="feature-tag">Skill System</span>
+                            <span class="feature-tag">Blueprint Support</span>
+                        </div>
+                        <a href="noclip-crafting/index.html" class="btn btn-primary">View Documentation</a>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <i class="fas fa-pills"></i>
+                            <h3>noclip_drugs</h3>
+                        </div>
+                        <p>Advanced drug manufacturing and distribution system with addiction mechanics, dynamic pricing, and comprehensive effects.</p>
+                        <div class="project-features">
+                            <span class="feature-tag">Addiction System</span>
+                            <span class="feature-tag">Dynamic Pricing</span>
+                            <span class="feature-tag">Drug Effects</span>
+                            <span class="feature-tag">Market System</span>
+                        </div>
+                        <a href="noclip-drugs/index.html" class="btn btn-primary">View Documentation</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contact-section">
+                <h2>Get in Touch</h2>
+                <p>Have questions or need support? We're here to help!</p>
+                <div class="contact-links">
+                    <a href="https://github.com/NoClip-Labs" class="contact-link" target="_blank">
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </a>
+                    <a href="troubleshooting.html" class="contact-link">
+                        <i class="fas fa-tools"></i>
+                        Troubleshooting
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
