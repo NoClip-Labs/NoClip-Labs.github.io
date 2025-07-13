@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>noclip_crafting - Troubleshooting</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-code"></i> NoClip Labs</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-section">
+                    <span class="nav-section-title">Projects</span>
+                    <ul>
+                        <li><a href="index.html" class="active"><i class="fas fa-hammer"></i> noclip_crafting</a></li>
+                        <li><a href="../noclip-drugs/index.html"><i class="fas fa-pills"></i> noclip_drugs</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section">
+                    <span class="nav-section-title">noclip_crafting</span>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-book"></i> Overview</a></li>
+                        <li><a href="installation.html"><i class="fas fa-download"></i> Installation</a></li>
+                        <li><a href="configuration.html"><i class="fas fa-cogs"></i> Configuration</a></li>
+                        <li><a href="exports.html"><i class="fas fa-code"></i> Exports</a></li>
+                        <li><a href="troubleshooting.html" class="active"><i class="fas fa-tools"></i> Troubleshooting</a></li>
+                    </ul>
+                </li>
+                <li class="nav-section">
+                    <span class="nav-section-title">Resources</span>
+                    <ul>
+                        <li><a href="../troubleshooting.html"><i class="fas fa-tools"></i> General Troubleshooting</a></li>
+                        <li><a href="https://github.com/NoClip-Labs" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="index.html">noclip_crafting</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Troubleshooting</span>
+            </div>
+
+            <div class="docs-content">
+                <h1><i class="fas fa-tools"></i> noclip_crafting Troubleshooting</h1>
+                <p>This guide covers common issues and solutions for the noclip_crafting script, including recent fixes and improvements.</p>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Latest Updates:</strong> This troubleshooting guide has been updated to reflect recent fixes including ingredient handling, menu display issues, skill system integration, and crafting success/failure mechanics.
+                </div>
+
+                <h2>Recent Fixes & Improvements</h2>
+                
+                <div class="update-section">
+                    <h3><i class="fas fa-check-circle"></i> Latest Version Fixes</h3>
+                    <ul>
+                        <li><strong>Ingredient Handling:</strong> Fixed "attempt to compare table with number" errors by consolidating HasItem functions</li>
+                        <li><strong>Menu Display:</strong> Resolved hazard types and byproduct chance display issues in crafting menu</li>
+                        <li><strong>Item Labeling:</strong> Fixed crafting menu showing item names instead of proper labels</li>
+                        <li><strong>Skill System:</strong> Improved skill requirement checking and experience calculation</li>
+                        <li><strong>Crafting Success/Failure:</strong> Fixed success chance mechanics and ingredient return on failure</li>
+                        <li><strong>Error Handling:</strong> Added comprehensive safety checks and validation throughout the script</li>
+                        <li><strong>Police Alerts:</strong> Added placeholder implementation for SendPoliceAlertWithLocation</li>
+                        <li><strong>Hazard Effects:</strong> Fixed "attempt to index a number value" errors in hazard handling</li>
+                    </ul>
+                </div>
+
+                <h2>Common Issues & Solutions</h2>
+
+                <h3>Client-Side Errors</h3>
+
+                <div class="troubleshoot-item">
+                    <h4>"attempt to compare table with number"</h4>
+                    <p><strong>Cause:</strong> Ingredient amounts being passed as tables instead of numbers</p>
+                    <p><strong>Solution:</strong> This has been fixed in the latest version. The script now properly handles both table and number values for ingredient counts.</p>
+                    <div class="code-example">
+                        <h5>Fixed Code Example:</h5>
+                        <pre><code>-- The script now automatically sums table values
+local function HasItem(source, item, amount)
+    if type(amount) == "table" then
+        local total = 0
+        for _, count in pairs(amount) do
+            total = total + count
+        end
+        amount = total
+    end
+    -- Rest of function...
+end</code></pre>
+                    </div>
+                </div>
+
+                <div class="troubleshoot-item">
+                    <h4>"table index is nil" at editable_client.lua line 81</h4>
+                    <p><strong>Cause:</strong> Missing safety checks in menu creation functions</p>
+                    <p><strong>Solution:</strong> Added comprehensive validation and pcall wrappers around menu functions.</p>
+                    <div class="code-example">
+                        <h5>Safety Check Example:</h5>
+                        <pre><code>-- All menu functions now include safety checks
+local success, result = pcall(function()
+    lib.registerContext({
+        id = 'crafting_menu',
+        title = 'Crafting Menu',
+        options = menuOptions
+    })
+    lib.showContext('crafting_menu')
+end)
+
+if not success then
+    print("^1Error creating crafting menu: " .. tostring(result))
+end</code></pre>
+                    </div>
+                </div>
+
+                <div class="troubleshoot-item">
+                    <h4>"attempt to index a number value (field 'damage')"</h4>
+                    <p><strong>Cause:</strong> Hazard config being sent as number instead of table</p>
+                    <p><strong>Solution:</strong> Server now ensures hazard config is always sent as a table to the client.</p>
+                </div>
+
+                <h3>Server-Side Issues</h3>
+
+                <div class="troubleshoot-item">
+                    <h4>Server receiving "unknown" as item name</h4>
+                    <p><strong>Cause:</strong> Missing item field in crafting event</p>
+                    <p><strong>Solution:</strong> Fixed client code to include the item field when triggering crafting events.</p>
+                </div>
+
+                <div class="troubleshoot-item">
+                    <h4>"attempt to perform arithmetic on a nil value (field 'successExpMultiplier')"</h4>
+                    <p><strong>Cause:</strong> Incorrect config field reference in experience calculation</p>
+                    <p><strong>Solution:</strong> Fixed CalculateExperienceGain function to use correct config field names.</p>
+                </div>
+
+                <div class="troubleshoot-item">
+                    <h4>Missing function "SendPoliceAlertWithLocation"</h4>
+                    <p><strong>Cause:</strong> Function not implemented in the script</p>
+                    <p><strong>Solution:</strong> Added placeholder implementation with debug logging.</p>
+                    <div class="code-example">
+                        <h5>Placeholder Implementation:</h5>
+                        <pre><code>function SendPoliceAlertWithLocation(coords, message)
+    if Config.Debug then
+        print("^3[DEBUG] Police Alert: " .. message .. " at " .. tostring(coords))
+    end
+    -- Add your police alert system integration here
+    -- Example: exports['ps-dispatch']:CustomAlert(coords, message)
+end</code></pre>
+                    </div>
+                </div>
+
+                <h3>Crafting System Issues</h3>
+
+                <div class="troubleshoot-item">
+                    <h4>Crafting always succeeds despite low success chance</h4>
+                    <p><strong>Cause:</strong> Success/fail system was disabled in config</p>
+                    <p><strong>Solution:</strong> Success/fail system is now properly enabled and working.</p>
+                    <div class="code-example">
+                        <h5>Config Setting:</h5>
+                        <pre><code>Config.CraftingSystem = {
+    enableSuccessFail = true,  -- Enable success/fail mechanics
+    -- Other settings...
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="troubleshoot-item">
+                    <h4>Ingredients removed then given back on failure</h4>
+                    <p><strong>Cause:</strong> Missing HandleCraftingFailure function</p>
+                    <p><strong>Solution:</strong> Added proper failure handling that only returns ingredients if partial loss is enabled.</p>
+                    <div class="code-example">
+                        <h5>Failure Handling:</h5>
+                        <pre><code>function HandleCraftingFailure(source, recipe, ingredients)
+    if Config.CraftingSystem.partialLossOnFailure then
+        -- Return some ingredients based on partial loss chance
+        for item, amount in pairs(ingredients) do
+            local returnAmount = math.floor(amount * Config.CraftingSystem.partialLossChance)
+            if returnAmount > 0 then
+                exports.ox_inventory:AddItem(source, item, returnAmount)
+            end
+        end
+    end
+    -- No ingredients returned if partial loss is disabled
+end</code></pre>
+                    </div>
+                </div>
+
+                <div class="troubleshoot-item">
+                    <h4>Skill requirement not met despite high player level</h4>
+                    <p><strong>Cause:</strong> Skill system not fully implemented or configured</p>
+                    <p><strong>Solution:</strong> Skill system has been improved with better validation and admin commands for testing.</p>
+                    <div class="code-example">
+                        <h5>Admin Commands:</h5>
+                        <pre><code>/setskill [player_id] [skill_name] [level]  -- Set player skill level
+/checkskill [player_id] [skill_name]       -- Check player skill level
+/resetskills [player_id]                   -- Reset all player skills</code></pre>
+                    </div>
+                </div>
+
+                <h3>Menu Display Issues</h3>
+
+                <div class="troubleshoot-item">
+                    <h4>Hazard warnings and byproduct chances showing in menu</h4>
+                    <p><strong>Cause:</strong> Menu description including unwanted information</p>
+                    <p><strong>Solution:</strong> Disabled display of hazard warnings, byproduct chances, XP gain, and success chance in menu descriptions.</p>
+                </div>
+
+                <div class="troubleshoot-item">
+                    <h4>Menu title showing item names instead of labels</h4>
+                    <p><strong>Cause:</strong> Missing item label retrieval logic</p>
+                    <p><strong>Solution:</strong> Added robust item label handling with special support for weapons.</p>
+                    <div class="code-example">
+                        <h5>Item Label Handling:</h5>
+                        <pre><code>local function GetItemLabel(itemName)
+    if Config.UseOxInventory then
+        local item = exports.ox_inventory:Items(itemName)
+        if item then
+            return item.label or itemName
+        end
+    end
+    -- Fallback to QBCore items
+    local qbItem = QBCore.Shared.Items[itemName]
+    return qbItem and qbItem.label or itemName
+end</code></pre>
+                    </div>
+                </div>
+
+                <h3>Debugging & Testing</h3>
+
+                <div class="troubleshoot-item">
+                    <h4>Enable Debug Mode</h4>
+                    <p>Set <code>Config.Debug = true</code> in your config to get detailed logging for troubleshooting:</p>
+                    <div class="code-example">
+                        <pre><code>Config = {}
+Config.Debug = true  -- Enable detailed logging
+
+-- Debug logs will show:
+-- - Item data retrieval
+-- - Menu creation process
+-- - Skill checks
+-- - Crafting events
+-- - Error details</code></pre>
+                    </div>
+                </div>
+
+                <div class="troubleshoot-item">
+                    <h4>Admin Commands for Testing</h4>
+                    <p>Use these commands to test and debug the crafting system:</p>
+                    <div class="code-example">
+                        <pre><code>/craftingdebug                    -- Toggle debug mode
+/setskill [player_id] [skill] [level]  -- Set player skill level
+/checkskill [player_id] [skill]        -- Check player skill level
+/resetskills [player_id]               -- Reset all player skills
+/giveitem [player_id] [item] [amount]  -- Give items for testing</code></pre>
+                    </div>
+                </div>
+
+                <h2>Performance Optimization</h2>
+
+                <div class="troubleshoot-item">
+                    <h4>Reduce Debug Logging in Production</h4>
+                    <p>For better performance in production, ensure debug mode is disabled:</p>
+                    <div class="code-example">
+                        <pre><code>Config.Debug = false  -- Disable in production</code></pre>
+                    </div>
+                </div>
+
+                <div class="troubleshoot-item">
+                    <h4>Optimize Recipe Loading</h4>
+                    <p>The script now includes optimized recipe loading with better caching and validation.</p>
+                </div>
+
+                <h2>Getting Help</h2>
+                <p>If you're still experiencing issues after trying these solutions:</p>
+                <ol>
+                    <li><strong>Enable Debug Mode:</strong> Set <code>Config.Debug = true</code> and check server console</li>
+                    <li><strong>Check Dependencies:</strong> Ensure all OX resources are up to date</li>
+                    <li><strong>Verify Configuration:</strong> Double-check your config.lua settings</li>
+                    <li><strong>Test with Admin Commands:</strong> Use the provided admin commands to test functionality</li>
+                    <li><strong>Check Item Names:</strong> Ensure all item names match exactly between config and ox_inventory</li>
+                    <li><strong>Contact Support:</strong> Provide error messages, config snippets, and steps to reproduce</li>
+                </ol>
+
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i>
+                    <strong>Note:</strong> Most issues have been resolved in the latest version. If you're experiencing problems, make sure you have the most recent version of the script.
+                </div>
+
+                <div class="next-steps">
+                    <h3>Next Steps</h3>
+                    <div class="step-links">
+                        <a href="configuration.html" class="btn btn-primary">
+                            <i class="fas fa-cogs"></i>
+                            Configuration Guide
+                        </a>
+                        <a href="installation.html" class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            Installation Guide
+                        </a>
+                        <a href="../troubleshooting.html" class="btn btn-primary">
+                            <i class="fas fa-tools"></i>
+                            General Troubleshooting
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html> 
